@@ -5,6 +5,7 @@ import sys
 import urllib
 import requests
 
+header = {'content-type': 'application/json','User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:22.0) Gecko/20100101 Firefox/22.0'}
 
 def get_onepage_urls(onepageurl):
     """获取单个翻页的所有图片的urls+当前翻页的下一翻页的url"""
@@ -12,7 +13,8 @@ def get_onepage_urls(onepageurl):
         print('已到最后一页, 结束')
         return [], ''
     try:
-        html = requests.get(onepageurl)
+#         html = requests.get(onepageurl)###Exceeded 30 redirects，缺少headers，重定向
+        html = requests.get(onepageurl, headers=header)
         html.encoding = 'utf-8'
         html = html.text
     except Exception as e:
