@@ -2,14 +2,16 @@ import glob
 import os
 import cv2
 count=0
-for path in glob.glob('download_room/*.jpg'):
-    A=cv2.imread(path)
-    h, w, _ = A.shape
-    # if min(w,h)<400:
-    if A is None:
-        print('del ',path)
-        os.remove(path)
-        count+=1
+names = ['png','jpg','jpeg','bmp']
+for name in names:
+    for path in glob.glob('download_room/*.'+name):
+        A=cv2.imread(path)
+    #     h, w, _ = A.shape
+    #     if min(w,h)<400:
+        if A is None:
+            print('del ',path)
+            os.remove(path)
+            count+=1
 print(count)
 
 # from skimage import io
